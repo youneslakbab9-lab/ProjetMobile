@@ -1,10 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from 'react-native'; // On importe Button
+import { Button } from 'react-native';
 
 import DashboardScreen from './src/screens/DashboardScreen';
+import DetailScreen from './src/screens/DetailScreen'; // <--- NOUVEL IMPORT
 import LoginScreen from './src/screens/LoginScreen';
-import ProfileScreen from './src/screens/ProfileScreen'; // Import du profil
+import ProfileScreen from './src/screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,8 +25,7 @@ export default function App() {
           component={DashboardScreen} 
           options={({ navigation }) => ({
             title: 'Tableau de bord',
-            headerLeft: null, // Pas de retour arrière vers login
-            // On ajoute un bouton à droite pour aller au profil
+            headerLeft: null,
             headerRight: () => (
               <Button 
                 onPress={() => navigation.navigate('Profile')} 
@@ -40,6 +40,13 @@ export default function App() {
           name="Profile" 
           component={ProfileScreen} 
           options={{ title: 'Mon Profil' }} 
+        />
+
+        {/* NOUVELLE ROUTE */}
+        <Stack.Screen 
+          name="Details" 
+          component={DetailScreen} 
+          options={{ title: 'Détails de la formation' }} 
         />
         
       </Stack.Navigator>
